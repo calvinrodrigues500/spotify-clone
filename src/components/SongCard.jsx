@@ -1,6 +1,5 @@
-import React from 'react'
 
-const SongCard = () => {
+const SongCard = ({ video }) => {
   return (
     <div>SongCard</div>
   )

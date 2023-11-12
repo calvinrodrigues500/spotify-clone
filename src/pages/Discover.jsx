@@ -1,8 +1,18 @@
 import { Error, Loader, SongCard } from "../components"
 import { genres } from "../assets/constants"
+import { useGetRecommendedQuery } from '../redux/services/deezer';
 
 const Discover = () => {
-  console.log('geners ', genres)
+
+  // const { data, isFetching, error } = useGetRecommendedQuery();
+
+  const data = [];
+
+  console.log('--------- ', data?.results);
+
+  // if (isFetching) {
+  //   return <Loader/>
+  // }
 
   const genreTitle = 'Pop';
 
@@ -15,13 +25,24 @@ const Discover = () => {
           value=""
           className="bg-black text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-5 border-none"
         >
-          {genres.map((genre, index) => {
-            return <option key={index}>
+          {genres.map((genre) => {
+            return <option
+              key={genre.value}
+              value={genre.value}>
               {genre.title}
             </option>
           })}
 
         </select>
+      </div>
+
+      <div className="flex flex-wrap sm:justify-start justify-center gap-8">
+        {data?.results?.map((video) => (
+          <SongCard 
+            key={video.videoId}
+            video={ video }
+          />
+        ))}
       </div>
     </div>
   )
